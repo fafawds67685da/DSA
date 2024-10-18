@@ -1,0 +1,28 @@
+sn* del_beg(sn*head)
+{
+  if(head == NULL)
+  {
+   printf("\t List is empty \n");
+   return head;
+  }
+  if(head->next == head)
+  {
+   sn*p2=head;
+   head=NULL;
+   free(p2);
+   return head;
+  }
+
+  sn*p2,*p3;
+  p2=head;
+  while(p2->next!=head)
+  {
+   p2=p2->next;
+  }
+   p3=head;
+   head=p3->next;
+   head->prev=p2;
+   p2->next=head;
+   free(p3);
+   return head;
+ }

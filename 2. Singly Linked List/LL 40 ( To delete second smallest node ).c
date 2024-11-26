@@ -15,7 +15,7 @@ sn*small2_del(sn*head)
     else
     {
         sn*p1=head,*p2=NULL,*p3=NULL,*p4=head,*p5=NULL,*p6=head;
-        int z=p1->info,z2=p1->info;
+        int z=INT_MAX,z2=INT_MAX;
         while(p1!=NULL)
         {
             if(p1->info<z)
@@ -26,6 +26,20 @@ sn*small2_del(sn*head)
                 p3=p2;
                 p6=p4;
                 p4=p1;
+            }
+            else
+            {
+                if(p1->info<z2)
+                {
+                    z2=p1->info;
+                    p3=p2;
+                    p5=p3;
+
+                    p4=p1;
+                    p6=p4;
+
+                }
+
             }
             p2=p1;
             p1=p1->next;

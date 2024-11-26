@@ -14,47 +14,49 @@ sn*small2_del(sn*head)
     }
     else
     {
-        sn*p1=head,*p2=NULL,*p3=NULL,*p4=head,*p5=NULL,*p6=head;
+        sn* p1=head,*p2=NULL,*p3=NULL,*p4=NULL;
         int z=INT_MAX,z2=INT_MAX;
+
         while(p1!=NULL)
         {
             if(p1->info<z)
             {
-                z2=z;
                 z=p1->info;
-                p5=p3;
-                p3=p2;
-                p6=p4;
-                p4=p1;
             }
-            else
-            {
-                if(p1->info<z2)
-                {
-                    z2=p1->info;
-                    p3=p2;
-                    p5=p3;
-
-                    p4=p1;
-                    p6=p4;
-
-                }
-
-            }
-            p2=p1;
             p1=p1->next;
         }
-        if(p5==NULL)
+
+        p1=head;
+
+
+
+
+        while(p1!=NULL)
         {
-            head=p6->next;
-            free(p6);
-            return head;
+            if(p1->info>z && p1->info<z2)
+            {
+                z2=p1->info;
+
+                p4=p3;
+
+                p2=p1;
+            }
+            p3=p1;
+            p1=p1->next;
+        }
+
+
+        if(p2==head)
+        {
+            head=head->next;
+            free(p2);
         }
         else
         {
-            p5->next=p6->next;
-            free(p6);
-            return head;
+            p4->next=p2->next;
+            free(p2);
         }
+
+        return head;
     }
 }

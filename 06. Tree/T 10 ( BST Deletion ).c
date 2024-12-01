@@ -1,52 +1,76 @@
-bst* delete(bst* root, int val)
+count(tree* root, int z,int y)
 {
-    if (root == NULL)
-        return root;
-
-    if (val < root->val) // Value lies in the left subtree
-        root->left = delete(root->left, val);
-
-    else if (val > root->val) // Value lies in the right subtree
-        root->right = delete(root->right, val);
-
-    else // Node to be deleted is found
+    if(root==NULL)
     {
-        if (root->left == NULL && root->right == NULL) // Case 1: No children
-        {
-            free(root);
-            return NULL;
-        }
-
-        else if (root->left == NULL) // Case 2: Only right child
-        {
-            bst* temp = root->right;
-            free(root);
-            return temp;
-        }
-
-        else if (root->right == NULL) // Case 3: Only left child
-        {
-            bst* temp = root->left;
-            free(root);
-            return temp;
-        }
-
-        // Case 4: Two children
-        bst* temp = min(root->right); // Find the inorder successor
-        root->val = temp->val; // Replace current node's value with successor's value
-        root->right = delete(root->right, temp->val); // Delete the successor
+        return root;
     }
-    return root;
+    else
+    {
+        if(z<root->info)
+        {
+            root->left=count(root->left,z,y);
+        }
+        else if(z>root->info)
+        {
+            root->right=count(root->right,z,y);
+        }
+        else
+        {
+            if(root->info==z)
+            {
+                    y+=1;
+                    if(root->left== NULL && root->left==NULL)
+                        {
+                            return NULL;
+                        }
+
+                    else if(root->left== NULL || root->left==NULL)
+                        {
+                            if(root->left==NULL)
+                                {
+                                    return root->right;
+                                }
+                            else
+                                {
+                                    return root->left;
+                                }
+                        }
+
+                    else
+                        {
+                            int a =min(root->right,z);
+                            root->info =a;
+                            root->right = count(root->right,a,y);
+                        }
+                }
+        }
+    }
 }
 
-// Function to find the minimum value in a BST
-bst* min(bst* root)
+min(tree *root, int a)
 {
-    if (root == NULL)
-        return root;
-
-    if (root->left == NULL)
-        return root;
-
-    return min(root->left);
+    if(root==NULL)
+    {
+        return a;
+    }
+    else
+    {
+        a=root->info;
+        min(root->left,a);
+    }
 }
+
+
+
+
+
+            printf("\t Enter the info \n");
+            scanf("%d",&z);
+            y=0;
+            count(root,z,y);
+            if(y==0)
+            {
+                printf("\t Node not present \n");
+            }
+
+            break;

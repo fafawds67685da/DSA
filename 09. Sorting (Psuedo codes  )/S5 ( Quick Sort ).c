@@ -1,32 +1,48 @@
-void quick(char *p, int low, int high, int l)
+int partition(int a[],int l,int h)
 {
-    if (low < high)
+    int pivot = a[l];
+    int i =l,j=h;
+    do
     {
-        int pivot_index = partition(p, low, high);
-        quick(p, low, pivot_index - 1,l);
-        quick(p, pivot_index + 1, high,l);
-    }
-}
-
-int partition(char *p, int low, int high)
-{
-    char pivot = p[high];
-    int i = low - 1;
-
-    for (int j = low; j < high; j++)
-    {
-        if (p[j] <= pivot)
+        do
         {
             i++;
-            char temp = p[i];
-            p[i] = p[j];
-            p[j] = temp;
+        } while(a[i]<=pivot);
+
+
+        do
+        {
+            j--;
+        } while (a[j]>pivot);
+
+
+        if(i<j)
+        {
+            int t=a[i];
+            a[i]=a[j];
+            a[j]=t;
+
         }
-    }
+    }while (i<j);
 
-    char temp = p[i + 1];
-    p[i + 1] = p[high];
-    p[high] = temp;
+    int t=a[l];
+    a[l]=a[j];
+    a[j]=t;
+    return j;
 
-    return i + 1;
 }
+
+void quick(int *arr, int l, int h)
+{
+    int j;
+    if(l<h)
+    {
+        j=partition(arr,l,h);
+        quick(arr,l,j);
+        quick(arr,j+1,h);
+    }
+}
+
+case 6:
+            quick(arr,0,n);
+            break;

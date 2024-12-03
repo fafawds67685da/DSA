@@ -1,19 +1,13 @@
-sn * insert_beg(sn*head)
+sn* insert_beg(sn* head)
 {
-    sn *temp;
-    temp=(sn*)malloc(sizeof(sn));
-    if(temp==NULL)
+    sn* p1=(sn*)malloc(sizeof(sn));
+    if(p1==NULL)
     {
-        printf("\t Memory is not allocated \n");
+        printf("\t Memory not allocated \n");
+        return head;
     }
-    else
-    {
-        
-    printf("\t Enter the element \n");
-    scanf("%d",&temp->info);
-    temp->next=head;
-    head = temp;
-
-    }
-    return head;
+    printf("\t Enter the info \n");
+    scanf("%d",&p1->info);
+    p1->next=head;
+    return p1;
 }
